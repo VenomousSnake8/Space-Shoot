@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Space Shoot</title>
+  <style>
+</style>
+</head>
+<body>
+  <div class="center">
+    <div class="pristavka">
+        <div class="controls">
+          <div class="grid">
+            <div>
+              <svg width="35" height="65" viewBox="0 0 35 65" fill="none" xmlns="http://www.w3.org/2000/svg" class="joy" id="joy-up">
+                <path d="M1 5L0.999998 44.444C0.999998 45.4637 1.38948 46.445 2.08884 47.1872L14.5888 60.4525C16.1679 62.1282 18.8321 62.1282 20.4112 60.4525L32.9112 47.1872C33.6105 46.445 34 45.4637 34 44.444L34 5C34 2.79086 32.2091 1 30 1L5 1C2.79086 1 1 2.79086 1 5Z" fill="#8B8B8B" stroke="black" stroke-width="2" class="outer-btn"/>
+                <path d="M10 12.5C9.17157 12.5 8.5 13.1716 8.5 14L8.5 36.2015C8.5 36.586 8.64766 36.9558 8.9125 37.2346L16.4125 45.1293C17.0039 45.7518 17.9961 45.7518 18.5875 45.1293L26.0875 37.2346C26.3523 36.9558 26.5 36.586 26.5 36.2015L26.5 14C26.5 13.1716 25.8284 12.5 25 12.5L10 12.5Z" fill="#52FF00" stroke="black" class="inner-btn"/>
+                <rect x="11.5" y="16.5" width="12" height="12" rx="1.5" fill="#585858" stroke="black"/>
+              </svg>
+            </div>  
+            <div>
+              <svg width="65" height="35" viewBox="0 0 65 35" fill="none" xmlns="http://www.w3.org/2000/svg" class="joy" id="joy-left">
+                <path d="M1 30C1 32.2091 2.79086 34 5 34H44.444C45.4637 34 46.445 33.6105 47.1872 32.9112L60.4525 20.4112C62.1282 18.8321 62.1282 16.1679 60.4525 14.5888L47.1872 2.08885C46.445 1.38949 45.4637 1 44.444 1H5C2.79086 1 1 2.79086 1 5V30Z" fill="#8B8B8B" stroke="black" stroke-width="2" class="outer-btn"/>
+                <path d="M12.5 25C12.5 25.8284 13.1716 26.5 14 26.5H36.2015C36.586 26.5 36.9558 26.3523 37.2346 26.0875L45.1293 18.5875C45.7518 17.9961 45.7518 17.0039 45.1293 16.4125L37.2346 8.9125C36.9558 8.64767 36.586 8.5 36.2015 8.5H14C13.1716 8.5 12.5 9.17157 12.5 10V25Z" fill="#52FF00" stroke="black" class="inner-btn"/>
+                <rect x="16.5" y="11.5" width="12" height="12" rx="1.5" fill="#585858" stroke="black"/>
+              </svg>
+              <svg width="65" height="35" viewBox="0 0 65 35" fill="none" xmlns="http://www.w3.org/2000/svg" class="joy" id="joy-right">
+                <path d="M1 30C1 32.2091 2.79086 34 5 34H44.444C45.4637 34 46.445 33.6105 47.1872 32.9112L60.4525 20.4112C62.1282 18.8321 62.1282 16.1679 60.4525 14.5888L47.1872 2.08885C46.445 1.38949 45.4637 1 44.444 1H5C2.79086 1 1 2.79086 1 5V30Z" fill="#8B8B8B" stroke="black" stroke-width="2" class="outer-btn"/>
+                <path d="M12.5 25C12.5 25.8284 13.1716 26.5 14 26.5H36.2015C36.586 26.5 36.9558 26.3523 37.2346 26.0875L45.1293 18.5875C45.7518 17.9961 45.7518 17.0039 45.1293 16.4125L37.2346 8.9125C36.9558 8.64767 36.586 8.5 36.2015 8.5H14C13.1716 8.5 12.5 9.17157 12.5 10V25Z" fill="#52FF00" stroke="black" class="inner-btn"/>
+                <rect x="16.5" y="11.5" width="12" height="12" rx="1.5" fill="#585858" stroke="black"/>
+              </svg> 
+            </div>
+            <div>
+              <svg width="35" height="65" viewBox="0 0 35 65" fill="none" xmlns="http://www.w3.org/2000/svg" class="joy" id="joy-down">
+                <path d="M1 5L0.999998 44.444C0.999998 45.4637 1.38948 46.445 2.08884 47.1872L14.5888 60.4525C16.1679 62.1282 18.8321 62.1282 20.4112 60.4525L32.9112 47.1872C33.6105 46.445 34 45.4637 34 44.444L34 5C34 2.79086 32.2091 1 30 1L5 1C2.79086 1 1 2.79086 1 5Z" fill="#8B8B8B" stroke="black" stroke-width="2" class="outer-btn"/>
+                <path d="M10 12.5C9.17157 12.5 8.5 13.1716 8.5 14L8.5 36.2015C8.5 36.586 8.64766 36.9558 8.9125 37.2346L16.4125 45.1293C17.0039 45.7518 17.9961 45.7518 18.5875 45.1293L26.0875 37.2346C26.3523 36.9558 26.5 36.586 26.5 36.2015L26.5 14C26.5 13.1716 25.8284 12.5 25 12.5L10 12.5Z" fill="#52FF00" stroke="black" class="inner-btn"/>
+                <rect x="11.5" y="16.5" width="12" height="12" rx="1.5" fill="#585858" stroke="black"/>
+              </svg>
+            </div>
+          </div> 
+        </div>
+        <div class="border2">
+        </div>
+        <div class="ots">
+          <table class="buttons" id="buttons">
+            <tr><td></td><td><div class="big-circle" id="triangl"><div class="triangle">&#9650;</div></div></td><td></td></tr>
+            <tr><td><div class="big-circle" id="circle"><div class="cir"></div></div></td><td></td><td><div class="big-circle" id="squar"><div class="square"></div></div></td></tr>
+            <tr><td></td><td><div class="big-circle" id="cros"><div class="cross">&times;</div></div></td><td></td></tr>
+          </table>
+        </div>
+    </div>
+  </div> 
+  <div class="main">
+  </div>   
+  <script src="script.js">
+  </script>
+</body>
+</html>
