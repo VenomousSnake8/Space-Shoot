@@ -40,7 +40,7 @@ function Game() {
         invaderAcceleration: 0,
         invaderDropDistance: 20,
         rocketVelocity: 800,
-        rocketMaxFireRate: 10.5,
+        rocketMaxFireRate: 1.5,
         gameWidth: 900,
         gameHeight: 600,
         fps: 60,
