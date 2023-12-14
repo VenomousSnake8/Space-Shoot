@@ -36,20 +36,20 @@ function Game() {
         bombRate: 0.05,
         bombMinVelocity: 50,
         bombMaxVelocity: 50,
-        invaderInitialVelocity: 25,
+        invaderInitialVelocity: 50,
         invaderAcceleration: 0,
         invaderDropDistance: 20,
-        rocketVelocity: 120,
-        rocketMaxFireRate: 2,
+        rocketVelocity: 800,
+        rocketMaxFireRate: 10.5,
         gameWidth: 900,
         gameHeight: 600,
-        fps: 50,
+        fps: 60,
         debugMode: false,
         invaderRanks: 5,
         invaderFiles: 10,
-        shipSpeed: 120,
+        shipSpeed: 150,
         levelDifficultyMultiplier: 0.2,
-        pointsPerInvader: 5,
+        pointsPerInvader: 10,
         limitLevelIncrease: 25
     };
 
@@ -265,12 +265,12 @@ WelcomeState.prototype.draw = function(game, dt, ctx) {
     //  Clear the background.
     ctx.clearRect(0, 0, game.width, game.height);
 
-    ctx.font="30px Arial";
+    ctx.font="30px Retro";
     ctx.fillStyle = '#ffffff';
     ctx.textBaseline="middle"; 
     ctx.textAlign="center"; 
    
-    ctx.font="16px Arial";
+    ctx.font="16px Retro";
 
   
 };
@@ -298,15 +298,15 @@ GameOverState.prototype.draw = function(game, dt, ctx) {
     //  Clear the background.
     ctx.clearRect(0, 0, game.width, game.height);
 
-    ctx.font="30px Arial";
-    ctx.fillStyle = '#ffffff';
+    ctx.font="100px Retro";
+    ctx.fillStyle = '#52ff00';
     ctx.textBaseline="center"; 
     ctx.textAlign="center"; 
     ctx.fillText("Game Over!", game.width / 2, game.height/2 - 40); 
-    ctx.font="16px Arial";
-    ctx.fillText("You scored " + game.score + " and got to level " + game.level, game.width / 2, game.height/2);
-    ctx.font="16px Arial";
-    ctx.fillText("Press 'Space' to play again.", game.width / 2, game.height/2 + 40);   
+    ctx.font="36px Retro";
+    ctx.fillText("You scored " + game.score + " and got to level " + game.level, game.width / 2, game.height/2 + 40);
+    ctx.font="36px Retro";
+    ctx.fillText("Press 'Space' to play again.", game.width / 2, game.height/2 + 90);   
 };
 
 GameOverState.prototype.keyDown = function(game, keyCode) {
@@ -564,14 +564,17 @@ PlayState.prototype.draw = function(game, dt, ctx) {
     ctx.clearRect(0, 0, game.width, game.height);
     
     //  Draw ship.
-    ctx.fillStyle = '#999999';
-    ctx.fillRect(this.ship.x - (this.ship.width / 2), this.ship.y - (this.ship.height / 2), this.ship.width, this.ship.height);
+    let shipSprite = new Image();
+    shipSprite.src = "ship.svg";
+    ctx.drawImage(shipSprite, this.ship.x - (this.ship.width / 2), this.ship.y - (this.ship.height / 1.5), this.ship.width, this.ship.height);
 
     //  Draw invaders.
-    ctx.fillStyle = '#006600';
-    for(var i=0; i<this.invaders.length; i++) {
+    let invaderSprite = new Image();
+    let arrayInvader = ['invader3.svg', 'invader1.svg', 'invader2.svg'];
+    for(var i = 0; i < this.invaders.length; i++) {
         var invader = this.invaders[i];
-        ctx.fillRect(invader.x - invader.width/2, invader.y - invader.height/2, invader.width, invader.height);
+        invaderSprite.src = arrayInvader[this.level % 3];
+        ctx.drawImage(invaderSprite, invader.x - invader.width/2, invader.y - invader.height/2, invader.width, invader.height);
     }
 
     //  Draw bombs.
@@ -582,15 +585,15 @@ PlayState.prototype.draw = function(game, dt, ctx) {
     }
 
     //  Draw rockets.
-    ctx.fillStyle = '#ff0000';
+    ctx.fillStyle = '#42aaff';
     for(var i=0; i<this.rockets.length; i++) {
         var rocket = this.rockets[i];
-        ctx.fillRect(rocket.x, rocket.y - 2, 3, 13);
+        ctx.fillRect(rocket.x - 2, rocket.y - 55, 5, 13);
     }
 
     //  Draw info.
     var textYpos = game.gameBounds.bottom + ((game.height - game.gameBounds.bottom) / 2) + 14/2;
-    ctx.font="14px Arial";
+    ctx.font="14px Retro";
     ctx.fillStyle = '#ffffff';
     var info = "Lives: " + game.lives;
     ctx.textAlign = "left";
@@ -615,6 +618,10 @@ PlayState.prototype.keyDown = function(game, keyCode) {
     if(keyCode == KEY_SPACE) {
         //  Fire!
         this.fireRocket();
+    }
+    if(keyCode == 27) {
+        //  Push the pause state.
+        game.pushState(new PauseState());
     }
     if(keyCode == 80) {
         //  Push the pause state.
@@ -645,7 +652,10 @@ function PauseState() {
 }
 
 PauseState.prototype.keyDown = function(game, keyCode) {
-
+    if(keyCode == 27) {
+        //  Pop the pause state.
+        game.popState();
+    }
     if(keyCode == 80) {
         //  Pop the pause state.
         game.popState();
@@ -657,7 +667,7 @@ PauseState.prototype.draw = function(game, dt, ctx) {
     //  Clear the background.
     ctx.clearRect(0, 0, game.width, game.height);
 
-    ctx.font="14px Arial";
+    ctx.font="100px Retro";
     ctx.fillStyle = '#ffffff';
     ctx.textBaseline="middle";
     ctx.textAlign="center";
@@ -702,12 +712,12 @@ LevelIntroState.prototype.draw = function(game, dt, ctx) {
     //  Clear the background.
     ctx.clearRect(0, 0, game.width, game.height);
 
-    ctx.font="36px Arial";
+    ctx.font="36px Retro";
     ctx.fillStyle = '#ffffff';
     ctx.textBaseline="middle"; 
     ctx.textAlign="center"; 
     ctx.fillText("Level " + this.level, game.width / 2, game.height/2);
-    ctx.font="24px Arial";
+    ctx.font="24px Retro";
     ctx.fillText("Ready in " + this.countdownMessage, game.width / 2, game.height/2 + 36);      
     return;
 };
@@ -724,7 +734,7 @@ function Ship(x, y) {
     this.x = x;
     this.y = y;
     this.width = 40;
-    this.height = 32;
+    this.height = 80;
 }
 
 /*
